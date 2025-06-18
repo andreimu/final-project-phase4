@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: quakewatch-presync-log-job
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: quakewatch-log-container
+          image: busybox
+          command: ["sh", "-c", "echo 'Starting ArgoCD sync process...'"]
